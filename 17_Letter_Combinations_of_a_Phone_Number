@@ -1,0 +1,76 @@
+class Solution {
+public:
+
+    vector<string> combine(vector<string> temp, string s)
+    {
+        vector<string> result;
+        for(int j=0;j<temp.size();j++)
+        {
+            for(int k=0;k<s.size();k++)
+            {
+                result.push_back(temp[j]+s[k]);
+            }
+        }
+        return result;
+    }
+
+    vector<string> letterCombinations(string digits) {
+
+        vector<string> s;
+        vector<string> result;
+        for(int i=0;i<digits.size();i++)
+        {
+            switch (digits[i]){
+                case '1':
+                    break;
+                case '2':
+                {
+                    s.push_back("abc");
+                    break;
+                }
+                case '3':
+                {
+                    s.push_back("def");
+                    break;
+                }
+                case '4':
+                {
+                    s.push_back("ghi");
+                    break;
+                }
+                case '5':
+                {
+                    s.push_back("jkl");
+                    break;
+                }
+                case '6':
+                {
+                    s.push_back("mno");
+                    break;
+                }
+                case '7':
+                {
+                    s.push_back("pqrs");
+                    break;
+                }
+                case '8':
+                {
+                    s.push_back("tuv");
+                    break;
+                }
+                case '9':
+                {
+                    s.push_back("wxyz");
+                    break;
+                }
+            }
+        }
+        result.push_back("");
+        for(int i=0;i<s.size();i++)
+        {
+            result = combine(result,s[i]);          
+        }
+
+        return result;   
+    }
+};
