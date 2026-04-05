@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void recursive(vector<string>& results, string save,int n,int a,int b)
+    {
+        if(a<0 || b<0) return;
+        if(a>b) return;
+        if(save.size() == n*2)
+        {
+            if(a==0 && b==0) results.push_back(save);
+            cout<<save<<endl;
+        }
+        else if(save.size() > n*2) return;
+        
+        recursive(results, save+'(', n, a-1, b);
+        recursive(results, save+')', n, a, b-1);
+
+    } 
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;
+        recursive(result,"(",n, n-1,n);
+        return result;
+
+    }
+};
