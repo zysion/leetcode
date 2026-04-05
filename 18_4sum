@@ -1,0 +1,52 @@
+class Solution {
+public:
+    long long sum(int a,int b,int c,int d)
+    {
+        return (long long)(a+b) + (long long)(c+d);
+    }
+    bool same_previous(vector<int>& nums, int i, int sta,int s)
+    {
+        if(nums[i] == s && s != INT_MAX) return true;
+        if(i == sta) return false;
+        if(nums[i] != nums[i-1]) return false;
+        return true;
+    }
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> result;
+        int t = INT_MAX;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(same_previous(nums,i,0,t)) continue;  
+            if((long long) nums[i]*4 > target) break; 
+            for(int j=i+1;j<nums.size();j++)
+            {
+                if(same_previous(nums,j,i+1,t)) continue;
+                if(sum(nums[i],nums[j],nums[j],nums[j])>target) break;
+                for(int x=j+1;x<nums.size();x++)
+                {
+                    if(same_previous(nums,x,j+1,t)) continue;
+                    if(sum(nums[i],nums[j],nums[x],nums[x])>target) break;
+                    for(int y=x+1;y<nums.size();y++)
+                    {
+                        if(same_previous(nums,y,x+1,t)) continue;
+                        long long k = sum(nums[i],nums[j],nums[x],nums[y]);
+                        if(k>target) break;
+                        if(k == target)
+                        {
+                            vector<int> temp;
+                            temp.push_back(nums[i]);
+                            temp.push_back(nums[j]);
+                            temp.push_back(nums[x]);
+                            temp.push_back(nums[y]);
+                            if(nums[i] == nums[y]) t=nums[i];
+                            else t=INT_MAX;
+                            result.push_back(temp);
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+};
